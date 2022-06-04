@@ -43,14 +43,14 @@ function generateInput(tzId, message = 'Введите искомое значе
 	const inputForm = `<form id="inputForm" data-for="${tzId}">
 	<label for="tzInputField">${messageInitial[tzId]}</label>
 	<input id="tzInputField" type="text" value="">
-	<button id="buttonInput" type="submit">Send</button>
+	<button id="buttonInput" type="submit">Отправить</button>
 	</form>`;
 	divInput.innerHTML = inputForm;
 	divOutput.innerHTML = '';
 }
 
 function generateOutput(tzId, message = 'Введите хоть что-то: ') {
-	const outputForm = `<span>Ваш результат для ${tzId}: ${message}</span>`;
+	const outputForm = `<span><b>Ваш результат для ${tzId}:</b> ${message}</span>`;
 	divOutput.innerHTML = outputForm;
 }
 
