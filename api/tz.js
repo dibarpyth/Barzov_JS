@@ -15,7 +15,7 @@ function tz1(inputData) {
 		status: 204,
 		msg: '',
 	};
-	const minValue = 7;
+	const minValue = parseInt(etalonValues['1']);
 
 	if (inputData > minValue) {
 		tzResult.status = 200;
@@ -30,7 +30,7 @@ function tz2(inputData) {
 		status: 404,
 		msg: 'Нет такого имени',
 	};
-	const etalonValue = 'Вячеслав';
+	const etalonValue = etalonValues['2'];
 
 	if (inputData.toLowerCase() === etalonValue.toLowerCase()) {
 		tzResult.status = 200;
@@ -46,12 +46,14 @@ function tz3(inputData) {
 		msg: '',
 	};
 
+	const baseValue = parseInt(etalonValues['3']);
+
 	const clearData = inputData
 		.replace(/['"\(\)\[\]\{\}]/g, '')
 		.replace(/[,;:]/g, ' ');
 	const numbersArray = clearData.split(' ');
 
-	const resultArray = numbersArray.filter(el => +el && el % 3 === 0);
+	const resultArray = numbersArray.filter(el => +el && el % baseValue === 0);
 
 	if (resultArray.length) {
 		tzResult.status = 200;
@@ -60,6 +62,12 @@ function tz3(inputData) {
 
 	return tzResult;
 }
+
+const etalonValues = {
+	1: '7',
+	2: 'Вячеслав',
+	3: '3',
+};
 
 exports.getTz = getTz;
 exports.tz1 = tz1;
