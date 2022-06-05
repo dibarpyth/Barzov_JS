@@ -25,7 +25,7 @@ function tz2(inputData) {
 	const result =
 		inputData.toLowerCase() === etalonValue.toLowerCase() ? replyOk : replyFail;
 
-	generateOutput('tz2', result);
+	return result;
 }
 
 function tz3(inputData) {
@@ -40,8 +40,10 @@ function tz3(inputData) {
 
 	const resultArray = numbersArray.filter(el => +el && el % 3 === 0);
 
-	generateOutput('tz3', resultArray);
+	return resultArray;
 }
 
 exports.getTz = getTz;
 exports.tz1 = tz1;
+exports.tz2 = tz2;
+exports.tz3 = tz3;
