@@ -1,10 +1,7 @@
 function getTz(tzId, inputData) {
 	console.log('tz input: ', tzId, inputData);
 	try {
-		return {
-			status: 200,
-			msg: this[`tz${tzId}`](inputData),
-		};
+		return this[`tz${tzId}`](inputData);
 	} catch {
 		return {
 			status: 404,
@@ -14,24 +11,40 @@ function getTz(tzId, inputData) {
 }
 
 function tz1(inputData) {
+	const tzResult = {
+		status: 204,
+		msg: '',
+	};
 	const minValue = 7;
-	return inputData > minValue ? 'Привет' : 'Пока :(';
+
+	if (inputData > minValue) {
+		tzResult.status = 200;
+		tzResult.msg = 'Привет';
+	}
+
+	return tzResult;
 }
 
 function tz2(inputData) {
+	const tzResult = {
+		status: 404,
+		msg: 'Нет такого имени',
+	};
 	const etalonValue = 'Вячеслав';
-	const replyOk = `Привет, ${etalonValue}`;
-	const replyFail = 'Нет такого имени';
-	const result =
-		inputData.toLowerCase() === etalonValue.toLowerCase() ? replyOk : replyFail;
 
-	return result;
+	if (inputData.toLowerCase() === etalonValue.toLowerCase()) {
+		tzResult.status = 200;
+		tzResult.msg = `Привет, ${etalonValue}`;
+	}
+
+	return tzResult;
 }
 
 function tz3(inputData) {
-	// inputData = '1,2, 3 , 4, 5 6 7 , , ,, 8   9,  10,,11  12,13,14,15';
-	// inputData = '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]';
-	// inputData = "['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']";
+	const tzResult = {
+		status: 204,
+		msg: '',
+	};
 
 	const clearData = inputData
 		.replace(/['"\(\)\[\]\{\}]/g, '')
@@ -40,7 +53,12 @@ function tz3(inputData) {
 
 	const resultArray = numbersArray.filter(el => +el && el % 3 === 0);
 
-	return resultArray;
+	if (resultArray.length) {
+		tzResult.status = 200;
+		tzResult.msg = resultArray;
+	}
+
+	return tzResult;
 }
 
 exports.getTz = getTz;
