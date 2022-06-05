@@ -10,6 +10,21 @@ function getTz(tzId, inputData) {
 	}
 }
 
+function updateTzSettings(tzId, inputData) {
+	try {
+		etalonValues[tzId] = inputData;
+		return {
+			status: 202,
+			msg: `Эталонное значение для ТЗ №"${tzId}" теперь равно "${inputData}"`,
+		};
+	} catch (error) {
+		return {
+			status: 404,
+			msg: `ТЗ за номером "${tzId}" не найдено :(`,
+		};
+	}
+}
+
 function tz1(inputData) {
 	const tzResult = {
 		status: 204,
@@ -73,3 +88,4 @@ exports.getTz = getTz;
 exports.tz1 = tz1;
 exports.tz2 = tz2;
 exports.tz3 = tz3;
+exports.updateTz = updateTzSettings;

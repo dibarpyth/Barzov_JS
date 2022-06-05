@@ -17,6 +17,13 @@ app.get('/tz', (req, res) => {
 	res.status(tzData.status).send(tzData.msg);
 });
 
+app.patch('/tz/update', (req, res) => {
+	const tzParams = req.query;
+	const tzData = tz.updateTz(tzParams.id, tzParams.data);
+
+	res.status(tzData.status).send(tzData.msg);
+});
+
 app.listen(port, () => {
 	console.log(`API running on port ${port}`);
 });
